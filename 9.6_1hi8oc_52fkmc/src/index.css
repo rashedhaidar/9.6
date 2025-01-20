@@ -1,0 +1,111 @@
+@tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes tableIn {
+      from { transform: translateY(10px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .animate-table-in {
+      animation: tableIn 0.3s ease-in-out;
+    }
+
+    @keyframes rowIn {
+      from { transform: translateX(-10px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    .animate-row-in {
+      animation: rowIn 0.2s ease-in-out;
+      animation-delay: calc(var(--delay) * 0.1s); /* Stagger animation */
+    }
+
+    .animate-row-in:nth-child(n){
+      --delay: counter(n);
+    }
+
+    /* Starfield Background */
+    body {
+      background-color: #0a0a0a; /* Dark background */
+      overflow-x: hidden;
+      font-family: 'Tajawal', sans-serif;
+      font-size: 14px; /* Reduced font size */
+    }
+
+    .starfield {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      perspective: 600px; /* Add perspective for parallax */
+    }
+
+    .star {
+      position: absolute;
+      background-color: #ffffff;
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: twinkle 2s infinite alternate;
+      transform-style: preserve-3d; /* Enable 3D transforms */
+    }
+
+    @keyframes twinkle {
+      from { opacity: 0.3; }
+      to { opacity: 0.5; }
+    }
+
+    /* Flip animation */
+    @keyframes flip {
+      0% {
+        transform: perspective(400px) rotateY(0);
+      }
+      50% {
+        transform: perspective(400px) rotateY(180deg);
+      }
+      100% {
+        transform: perspective(400px) rotateY(360deg);
+      }
+    }
+
+    .domain-box:hover {
+      animation: flip 0.6s;
+    }
+
+    .domain-box {
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .domain-box:hover {
+      transform: scale(1.05);
+    }
+
+    /* Hide scrollbar */
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Center the component */
+    body > div > div > div:nth-child(2) > div > div:first-child {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
